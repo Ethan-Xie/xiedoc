@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>新闻发布中心</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="__PUBLIC__/Admin/css2/images/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Admin/css2/javascript/jquery.min.js"></script>
+
+<link href="__PUBLIC__/Admin/css2/images/style.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+body {
+	background:#FFF
+}
+</style>
+
+<script type="text/javascript">
+$(function(){
+	//setMenuHeight
+	$('.menu').height($(window).height()-51-27-26);
+	$('.sidebar').height($(window).height()-51-27-26);
+	$('.page').height($(window).height()-51-27-26);
+	$('.page iframe').width($(window).width()-15-168);
+	
+	//menu on and off
+	$('.btn').click(function(){
+		$('.menu').toggle();
+		
+		if($(".menu").is(":hidden")){
+			$('.page iframe').width($(window).width()-15+5);
+			}else{
+			$('.page iframe').width($(window).width()-15-168);
+				}
+		});
+		
+	//
+	$('.subMenu a[href="#"]').click(function(){
+		$(this).next('ul').toggle();
+		return false;
+		});
+})
+</script>
+
+
+</head>
+
+<body>
+<div id="wrap">
+	<div id="header">
+    <div class="logo fleft"></div>
+    <div class="nav fleft">
+    	<ul>
+        	<div class="nav-left fleft"></div>
+            <li class="first">我的面板</li>
+        	<li>待扩展</li>
+            <li>待扩展</li>
+            <li>待扩展</li>
+            <li>待扩展</li>
+            <li>待扩展</li>
+            <li>待扩展</li>
+            <div class="nav-right fleft"></div>
+        </ul>
+    </div>
+    <a class="logout fright" href="login.html"> </a>
+    <div class="clear"></div>
+    <div class="subnav">
+    	<div class="subnavLeft fleft"></div>
+        <div class="fleft"></div>
+        <div class="subnavRight fright"></div>
+    </div>
+    </div>
+    <!--#header -->
+    <div id="content">
+    <div class="space"></div>
+    <div class="menu fleft">
+    	<ul>
+        	<li class="subMenuTitle">功能菜单</li>
+            <li class="subMenu"><a href="main.html" target=right1 >用户管理</a>
+            	<ul>
+                    <li><a href="main.html"  target=right1>用户管理</a></li>
+                    <li><a  href="addt.html"  target=right1>增加用户</a></li>
+                </ul>
+            </li>
+            <li class="subMenu"><a href="__APP__/news/main" target=right1 >新闻管理</a>
+            	<ul>
+            		<li><a href="__APP__/news/addt" target=right1>发布新闻</a></li>
+                	<li><a href="#">新闻管理</a></li>
+                    <li><a href="#">评论管理</a></li>
+                    
+                </ul>
+            </li>
+            <li class="subMenu"><a href="#" target="right">1</a></li>
+            <li class="subMenu"><a href="#" target="right">待扩展</a></li>
+            <li class="subMenu"><a href="#" target="right">待扩展</a></li>
+            <li class="subMenu"><a href="#" target="right">待扩展</a></li>
+            <li class="subMenu"><a href="#" target="right">待扩展</a></li>
+        </ul>
+    </div>
+    <div class="sidebar fleft"><div class="btn"></div></div>
+    <div class="page">
+   
+    
+     <iframe width="100%" scrolling="auto" height="100%" frameborder="false" allowtransparency="true"
+     style="border: medium none;" src="__ADM__/index/test.html" id="rightMain" name="right1"></iframe>
+  
+      
+    </div>
+    </div><!--#content -->
+    <div class="clear"></div>
+    <div id="footer"></div><!--#footer -->
+</div><!--#wrap -->
+
+</body>
+</html>
