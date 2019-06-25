@@ -1,7 +1,9 @@
 // 全局函数与变量
 export default {
   install (Vue, options) {
+    // 全局log方法
     Vue.prototype.log = console.log.bind(console)
+
     Vue.prototype.DocConfig = {
     // "server":'http://127.0.0.1/showdoc.cc/server/index.php?s=',api/common/verify ?s=
     //  'server': '../server/index.php'
@@ -9,7 +11,7 @@ export default {
       'local_name': 'http://localhost'
     // /server/index.php?s= http://doc.com/api/common/verify
     }
-    Vue.prototype.copyRight = 'powers by xiethan'
+    Vue.prototype.copyRight = 'powers by xiethan@qq.com'
     Vue.prototype.getData = function () {
       console.log('我是插件的方法')
     }

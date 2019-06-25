@@ -54,9 +54,21 @@ const router = new Router({
       ]
     },
     {
-      path: '/:item_id',
-      name: 'itemShow',
-      component: itemShow
+      name: '404',
+      path: '/404',
+      component: () => import('@/views/error/404')
+    },
+    {
+      name: '403',
+      path: '/403',
+      component: resolve => require(['@/views/error/403'], resolve),
+      meta: {model: 'error'}
+    },
+    {
+      name: '500',
+      path: '/500',
+      component: resolve => require(['@/views/error/500'], resolve),
+      meta: {model: 'error'}
     },
     {
       path: '/user/register',
@@ -82,6 +94,12 @@ const router = new Router({
       path: '/item/add',
       name: 'itemAdd',
       component: itemAdd
+    },
+    {
+      // 文章个性域名
+      path: '/:item_id',
+      name: 'itemShow',
+      component: itemShow
     }
   ]
 })

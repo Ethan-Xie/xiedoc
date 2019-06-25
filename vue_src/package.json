@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "babel-polyfill": "^6.26.0",
+    "babel-polyfill": "^6.26.0", 
     "element-ui": "^2.4.11",
     "install": "^0.12.2",
     "less": "^3.9.0",

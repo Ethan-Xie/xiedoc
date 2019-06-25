@@ -37,7 +37,7 @@ class Base extends controller{
                 file_put_contents('option.txt',json_encode($_REQUEST));
                 exit;
             }
-            
+            // 响应源
             header('Access-Control-Allow-Origin:*');
             // 响应类型
             header('Access-Control-Allow-Methods:*');
@@ -46,8 +46,8 @@ class Base extends controller{
             header("Access-Control-Request-Headers: Origin, X-Requested-With, content-Type, Accept, Authorization");
             */
         }
-        header('Access-Control-Allow-Origin:*');//允许跨域请求
-        header('Access-Control-Allow-Credentials : true');//允许跨域请求
+        header('Access-Control-Allow-Origin:http://localhost:8080');//允许跨域请求
+        header('Access-Control-Allow-Credentials: true');//允许跨域请求
         header("Access-Control-Allow-Headers: Origin,  Accept，, Connection, User-Agent, Authorization");
 
         //检测数据库文件

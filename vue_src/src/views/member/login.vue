@@ -23,7 +23,7 @@
               {required:true, message: '请输入手机号', trigger: 'blur'},
               {type:'number', message: '请输入正确的手机号', trigger: ['blur','change']}
             ]" -->
-          <el-input v-model="form.name" type="text"  placeholder="手机号"></el-input>
+          <el-input v-model="form.phone" type="text"  placeholder="手机号"></el-input>
         </el-form-item>
         <el-row>
           <el-col :span='14'>
@@ -34,7 +34,11 @@
               <el-input v-model.number="form.captcha"    placeholder="验证码"></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span='10'><el-button>获取验证码</el-button></el-col>
+          <el-col :span='10'><el-button
+            :disabled = 'isSending'
+            class="getCaptcha"
+            @click.stop.prevent="getCaptcha"
+          >{{tips}}</el-button></el-col>
         </el-row>
       </el-tab-pane>
     </el-tabs>
@@ -52,14 +56,17 @@
 </template>
 
 <script>
+import { getCaptcha } from '@/api/user'
+// require('../../assets/test.css')
 export default {
   data () {
     var checkAge = (rule, value, callback) => {
       if (!value) {
-        return callback(new Error('手机号码不能为空2'))
+        return callback(new Error('手机号码不能为空.'))
       }
     }
     return {
+      isSending: false,
       stepCaptchaVisible: false,
       state: {
         time: 60,
@@ -79,10 +86,64 @@ export default {
         phone: [{
           validator: checkAge, trigger: 'blur'
         }]
-      }
+      },
+      tips: '获取验证码2'
     }
   },
+  mounted () {
+    /*
+    const fun = ( resolve ) => Promise.resolve(
+      //    组件定义对象
+      console.log('resolve')
+    //throw new Error('手动返回错误')
+    resolve('成功了')
+    )
+    fun()
+    */
+  },
   methods: {
+    // event of get captcha
+    getCaptcha (e) {
+      // this.log(e)
+      var that = this
+      // 手机号码
+      var flag = 1
+      this.$refs['formLogin'].validateField(['phone'], (valid) => {
+        // that.log(valid) // 输出提示 true
+        if (valid) {
+          that.log('captcha success')
+          flag = 0
+        } else {
+          that.log('captcha fail')
+          return false
+        }
+      })
+      if (flag === 1) {
+        // 通过
+        that.log(flag)
+        // that.$message.loading('验证码发送中……', 0)
+        // that.log(this)
+        var times = 6
+        const interval = window.setInterval(() => {
+          if (times-- > 1) {
+            // console.log(times)
+            that.isSending = true
+            that.tips = '验证码发送中' + times + 's'
+          } else {
+            that.isSending = false
+            that.tips = '重新获取验证码'
+            window.clearInterval(interval)
+          }
+        }, 1000)
+      } else {
+        // 手机号验证未通过 promise 类型
+        getCaptcha('17666069836').then(
+          function (response) {
+            console.log(response)
+          })
+        that.log('flag:' + flag)
+      }
+    },
     // checkInstall () {
     //   checkInstall().then(res => {
     //     if (!checkResponse(res)) {
@@ -95,8 +156,8 @@ export default {
     //   })
     // },
 
-    handleClick (tab) {
-      console.log(tab)
+    handleClick (tab, event) {
+      console.log(tab, event)
     },
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
