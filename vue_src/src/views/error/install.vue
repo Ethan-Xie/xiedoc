@@ -130,7 +130,7 @@
 <script>
 import {checkInstall, install} from '../../api/common/common'
 import {checkResponse} from '../../assets/js/utils'
-import UserLayout from '../../components/layout/UserLayout'
+import UserLayout from '../../views/layout/UserLayout'
 
 export default {
   components: {

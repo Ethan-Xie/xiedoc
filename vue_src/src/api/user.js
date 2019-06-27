@@ -1,6 +1,6 @@
 import $http from '@/assets/js/http'
 
-export function getCaptcha (data) {
-  console.log('test getCapcha')
-  return $http.post('api/item/add', data)
+export function getCaptcha (mobile) {
+  console.log('httping getCapcha')
+  return $http.post('project/login/getCaptcha', {mobile: mobile})
 }

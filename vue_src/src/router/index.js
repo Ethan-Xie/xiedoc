@@ -20,22 +20,46 @@ const router = new Router({
     {
       name: 'member',
       path: '/member',
-      component: resolve => require(['@/components/layout/UserLayout'], resolve),
+      component: resolve => require(['@/views/layout/UserLayout'], resolve),
       meta: {mode: 'Login'},
       children: [
         {
           path: 'login',
           name: 'login',
-          component: () => import('@/views/member/login'),
+          component: resolve => require(['@/views/member/login'], resolve),
           meta: {model: 'Login'}
         },
         {
           path: 'register',
           name: 'register',
-          component: () => import('@/views/member/login'),
+          component: resolve => require(['@/views/member/login'], resolve),
           meta: {model: 'Login'}
         }
       ]
+    },
+    {
+      name: '404',
+      path: '/404',
+      component: resolve => require(['@/views/error/404'], resolve),
+      meta: {model: 'error'}
+    },
+    {
+      name: '403',
+      path: '/403',
+      component: resolve => require(['@/views/error/403'], resolve),
+      meta: {model: 'error'}
+    },
+    {
+      name: '500',
+      path: '/500',
+      component: resolve => require(['@/views/error/500'], resolve),
+      meta: {model: 'error'}
+    },
+    {
+      name: 'install',
+      path: '/install',
+      component: resolve => require(['@/views/error/install'], resolve),
+      meta: {model: 'error'}
     },
     {
       path: '/helloworld',
@@ -52,23 +76,6 @@ const router = new Router({
           component: Test
         }
       ]
-    },
-    {
-      name: '404',
-      path: '/404',
-      component: () => import('@/views/error/404')
-    },
-    {
-      name: '403',
-      path: '/403',
-      component: resolve => require(['@/views/error/403'], resolve),
-      meta: {model: 'error'}
-    },
-    {
-      name: '500',
-      path: '/500',
-      component: resolve => require(['@/views/error/500'], resolve),
-      meta: {model: 'error'}
     },
     {
       path: '/user/register',
