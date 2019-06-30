@@ -65,4 +65,22 @@
       ];
       return self::db()->insert($data) !== false;
     }
+
+    /**
+     * 流控策略
+     * @param $node
+     * @param string $ip
+     * @throws \Exception
+     */
+    public static function checkTraffic($node, $ip = '')
+    {
+        $where = ['node' => $node, 'seconds' => time()];
+        if ($ip) {
+            $where['ip'] = $ip;
+        }
+        $count = self::db()->where($where)->count();
+        if ($count >= 10) {
+            throw new \Exception('访问过于频繁', 1);
+        }
+    }
   }
