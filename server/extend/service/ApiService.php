@@ -66,7 +66,7 @@
       return self::db()->insert($data) !== false;
     }
 
-    /**
+        /**
      * 流控策略
      * @param $node
      * @param string $ip
