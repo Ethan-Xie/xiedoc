@@ -11,7 +11,7 @@ class Item extends Base
     public function __construct(){
       parent::__construct();
       // author 认证 没通过会直接退出
-      $this->uid = $this -> is_login_token();
+      // $this->uid = $this -> is_login_token();
 
     }
   // 项目列表  待加
@@ -288,6 +288,12 @@ class Item extends Base
 
           );
       $this->sendResult($return);
+  }
+
+  public function test()
+  {
+    Session_start();
+    $this->sendResult(['name' => session_name(), 'id' => session_id()]);
   }
 
 }
