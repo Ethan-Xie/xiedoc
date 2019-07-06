@@ -12,7 +12,7 @@ use controller\BasicApi;
 // use service\JwtService;
 // use service\LogService;
 // use service\NodeService;
-// use service\RandomService;
+use service\RandomService;
 
 // 邮箱 与 短信 公共模块
 // use mail\Mail;
@@ -79,7 +79,22 @@ class Login extends BasicApi
    */
   public function getCaptcha(){
     $mobile = $this ->request->post('mobile', '');
-    $code = RandomServie
+    $code = RandomServie::numeric(6);
+    if(!config('sms.debug')) {
+      $sms = new Sms();
+      $result = $sms -> vSend($mobile, [
+        'data' => [
+          'project' => 'xiethan@qq.com',
+          'code' => $code
+        ],
+      ]);
+      if(issError($result)) {
+        $this -> error('系统繁忙');
+      }
+    }
+    cache('captcha', $code);
+    cache('captchMobile', $mobile);
+    $this -> success('', config('sms.debug') ? $code :　'＇)
 
   }
 }
