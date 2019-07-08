@@ -16,7 +16,7 @@ use service\RandomService;
 
 // 邮箱 与 短信 公共模块
 // use mail\Mail;
-// use sms\Sms;
+//　use sms\Sms;
 
 // 引入 think 内置模块
 // use think\Db;
@@ -94,7 +94,66 @@ class Login extends BasicApi
     }
     cache('captcha', $code);
     cache('captchMobile', $mobile);
-    $this -> success('', config('sms.debug') ? $code :　'＇)
+    $this -> success('', config('sms.debug') ? $code :　'')
 
   }
+  
+  public function register()
+  {
+      $data = Request::only('email,name,password,password2,mobile,captcha');
+      $validate = Validate::make([
+          'email' => 'require',
+          'name' => 'require',
+          'password' => 'require|min:6',
+          'password2' => 'require|min:6',
+          'mobile' => 'require|min:11',
+          'captcha' => 'require|min:6',
+      ], [
+          'email.require' => '邮箱账号不能为空！',
+          'name.require' => '姓名不能为空！',
+          'password.require' => '登陆密码不能为空！',
+          'password.min' => '登录密码长度不能少于6位有效字符！',
+          'password2.require' => '确认密码不能为空！',
+          'password2.min' => '确认密码长度不能少于6位有效字符！',
+          'mobile.require' => '手机号码不能为空！',
+          'mobile.min' => '手机号码格式有误',
+          'captcha.require' => '验证码不能为空！',
+          'captcha.min' => '验证码格式有误',
+      ]);
+      $validate->check($data) || $this->error($validate->getError());
+      $member = Member::where(['email' => $data['email']])->field('id')->find();
+      if ($member) {
+          $this->error('该邮箱已被注册', 201);
+      }
+      $member = Member::where(['mobile' => $data['mobile']])->field('id')->find();
+      if ($member) {
+          $this->error('该手机已被注册', 202);
+      }
+      if (cache('captcha') != $data['captcha']) {
+          $this->error('验证码错误', 203);
+      }
+      if (cache('captchaMobile') != $data['mobile']) {
+          $this->error('手机号与验证码不匹配', 203);
+      }
+      $memberData = [
+          'email' => $data['email'],
+          'name' => $data['name'],
+          'account' => RandomService::alnumLowercase(),
+          'avatar' => 'https://static.vilson.xyz/cover.png',
+          'status' => 1,
+          'code' => createUniqueCode('member'),
+          'password' => $data['password'],
+          'mobile' => $data['mobile'],
+      ];
+      try {
+          $result = Member::createMember($memberData);
+      } catch (\Exception $e) {
+          $this->error($e->getMessage(), 205);
+      }
+      if (!$result) {
+          $this->error('注册失败', 203);
+      }
+      $this->success('');
+  }
+  
 }
