@@ -3,7 +3,7 @@
 namespace app\project\controller;
 
 // model 模块
-// use app\common\Model\Member;
+ use app\common\Model\Member;
 // use app\common\Model\Organization;
 
 use controller\BasicApi;
@@ -94,7 +94,7 @@ class Login extends BasicApi
     }
     cache('captcha', $code);
     cache('captchMobile', $mobile);
-    $this -> success('', config('sms.debug') ? $code :　'')
+    $this -> success('', config('sms.debug') ? $code :　'');
 
   }
   
