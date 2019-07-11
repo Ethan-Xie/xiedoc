@@ -75,7 +75,7 @@ class Login extends BasicApi
   }
 
   /**
-   * 获取验证码
+   * 获取手机验证码
    */
   public function getCaptcha(){
     $mobile = $this ->request->post('mobile', '');
@@ -94,7 +94,7 @@ class Login extends BasicApi
     }
     cache('captcha', $code);
     cache('captchMobile', $mobile);
-    $this -> success('', config('sms.debug') ? $code :　'');
+    $this -> success('', (config('sms.debug') ? $code :　''));
 
   }
   
