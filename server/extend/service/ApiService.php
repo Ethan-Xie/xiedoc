@@ -5,7 +5,7 @@
   use think\Request;
 
   /**
-   * 接口服务
+   * 接口服务: 接口缓存 + 流控策略
    * class ApiService
    */
 

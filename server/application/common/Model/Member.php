@@ -18,7 +18,7 @@ class Member extends CommonModel {
   // 上传 img
   public function uploadImg(File $file)
   {
-    return $this -> _uploadImg($file, config('upload.base_path'),. config('upload.member_avatar'));
+    return $this -> _uploadImg($file, config('upload.base_path'). config('upload.member_avatar'));
   }
 
 }

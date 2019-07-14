@@ -2,7 +2,7 @@
   namespace controller;
 
   use service\ApiService;
-  use service\ToolService;
+  use service\ToolsService;
 /**
  * 基础接口类
  */
@@ -26,6 +26,16 @@ class BasicApi
 //        }
   }
 
+    /**
+     * 返回成功的操作
+     * @param mixed $msg 消息内容
+     * @param array $data 返回数据
+     * @param integer $code 返回代码
+     */
+    protected function success($msg = '', $data = [], $code = 200)
+    {
+        ToolsService::success($msg, $data, $code);
+    }
   /**
      * 返回失败的请求
      * @param mixed $msg 消息内容

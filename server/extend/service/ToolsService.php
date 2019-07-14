@@ -17,14 +17,6 @@ class ToolsService
     if (PHP_SESSION_ACTIVE !== session_status()) {
       Session::init(config('session.'));
     }
-<<<<<<< HEAD
-    
-    // 获取token
-    $token = request() -> header('token', '');
-    empty($token) && $token = request() ->　post('token', '');
-    empty($token) && $token = request() ->　get('token', '');
-    
-=======
 
     // 获取token
     $token = request()->header('Token', '');
@@ -50,7 +42,6 @@ class ToolsService
                   exit;
     }
 
->>>>>>> e2923dd0023770963222572be4395dad44cd4b44
   }
 
   

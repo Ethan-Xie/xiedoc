@@ -8,4 +8,4 @@ return [
 
   'file' => 'file/default',
   'file_temp' => 'file/temp',
-]
+];

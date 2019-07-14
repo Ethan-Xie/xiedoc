@@ -47,21 +47,25 @@ class Login extends BasicApi
     // if($this -> request -> isGet()){
     //   return $this -> fetch('', ['title' => '用户登录']);
     // }
-    // // 输入数据验证
-    // $validate = Validate::make([
-    //   'account' => 'require|min:4',
-    //   'password'=> 'require|min:4'
-    // ],[
-    //   'account.require' => '登录账号不能为空',
-    //   'account.min' => '登录账号不能少于4位有效字符'
-    // ]);
+    // 输入数据验证
+    $validate = Validate::make([
+      'account' => 'require|min:4',
+      'password'=> 'require|min:4'
+    ],[
+      'account.require' => '登录账号不能为空',
+      'account.min' => '登录账号不能少于4位有效字符'
+    ]);
 
     $data = [
       'account' => $this ->request->post('acount', ''),
       'password' => $this ->request->post('password', '')
     ];
 
-    $validate -> check($data) || $this-> error($validate-> getError);
+    $member = Member::where(['email' => 'vilson@qq.com'])->field('id')->find();
+
+    $this -> success($member);
+
+    $validate -> check($data) || $this-> error($validate-> getError());
     $this ->request->post('mobile', '');
 
     // 使用手机
@@ -94,7 +98,8 @@ class Login extends BasicApi
     }
     cache('captcha', $code);
     cache('captchMobile', $mobile);
-    $this -> success('', (config('sms.debug') ? $code :　''));
+    // $this -> success('', (config('sms.debug') ? $code :　''));
+    $this -> success('', '');
 
   }
   
