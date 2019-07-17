@@ -63,7 +63,7 @@ class Login extends BasicApi
 
     $member = Member::where(['email' => 'vilson@qq.com'])->field('id')->find();
 
-   //  $this -> success($member);
+    $this -> success($member);
 
     $validate -> check($data) || $this-> error($validate-> getError());
     $this ->request->post('mobile', '');

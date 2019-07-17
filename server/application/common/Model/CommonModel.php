@@ -21,7 +21,7 @@ class CommonModel extends Model
         // 用户名
         'username'        => 'root',//'showdoc',
         // 密码
-        'password'        => '',//'showdoc123456',
+        'password'        => '06103601996/',//'showdoc123456',
         // 端口
         'hostport'        => '3306',//'3306',
         // 连接dsn
