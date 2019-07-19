@@ -17,6 +17,7 @@ class BasicApi
   // 构造方法
   public function __construct()
   {
+      var_dump('basic_api');
     ToolsService::corsOptionsHandler();
     $this->request = app('request');
 //        try {
