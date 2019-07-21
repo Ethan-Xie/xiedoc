@@ -67,13 +67,15 @@ class Login extends BasicApi
     $validate -> check($data) || $this-> error($validate-> getError());
     $this ->request->post('mobile', '');
 
-    // 使用手机
+    // 使用手机  
     if( $mobile ) {
       if (cache('captcha') != Request::param('captcha')){
         $this ->error('验证码错误', 203);
        }
-
-    //  if(cache('captchaMobile'))
+       
+       if (cache('captchaMobile') != $mobile) {
+        $this->error('手机号与验证码不匹配', 203);
+      }
     }
   }
 
